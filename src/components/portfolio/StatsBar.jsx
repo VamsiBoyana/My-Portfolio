@@ -1,0 +1,35 @@
+import React from "react";
+import { motion } from "framer-motion";
+
+const stats = [
+  { value: "2+", label: "Years Experience" },
+  { value: "30%", label: "Dev Time Reduced" },
+  { value: "99.9%", label: "System Uptime" },
+  { value: "15%", label: "Accuracy Boost" },
+];
+
+export default function StatsBar() {
+  return (
+    <section className="py-10 md:py-12 bg-[#161b22] border-y border-[#30363d]">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent mb-1">
+                {stat.value}
+              </div>
+              <div className="text-slate-500 text-sm">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
