@@ -213,7 +213,7 @@ export default function HeroSection({ id }) {
         <motion.div className="flex flex-wrap items-center justify-center gap-4 mb-8"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}>
-          <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=bharathpanuganti1@gmail.com"
+          <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(124,58,237,0.5)" }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 px-7 py-3 font-semibold rounded-xl text-white"
@@ -240,7 +240,7 @@ export default function HeroSection({ id }) {
           {[
             { icon: Github, label: "GitHub", href: "https://github.com/VamsiBoyana" },
             { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/vamsi-boyana-964550229/" },
-            { icon: Mail, label: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=bharathpanuganti1@gmail.com" },
+            { icon: Mail, label: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com" },
           ].map((s) => <MagneticBtn key={s.label} {...s} />)}
         </motion.div>
       </div>
