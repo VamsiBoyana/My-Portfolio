@@ -19,7 +19,7 @@ const education = [
 
 export default function EducationSection({ id }) {
   return (
-    <section id={id || "education"} className="pt-8 pb-16 md:pt-10 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+    <section id={id || "education"} className="pt-8 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           className="text-center mb-10"

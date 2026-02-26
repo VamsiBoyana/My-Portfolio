@@ -85,7 +85,7 @@ const colorMap = {
 export default function SkillsSection({ id }) {
   const [inView, setInView] = useState(false);
   return (
-    <section id={id || "skills"} className="pt-6 pb-16 md:pt-12 md:pb-20 bg-[#0d1117] relative overflow-hidden scroll-mt-14">
+    <section id={id || "skills"} className="pt-6 pb-16 md:pt-12 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
       {/* background glow pulse */}
       <motion.div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(88,28,135,0.08) 0%, transparent 70%)" }}

@@ -38,7 +38,7 @@ const links = [
 
 export default function ContactSection({ id }) {
   return (
-    <section id={id || "contact"} className="pt-4 pb-16 md:pt-12 md:pb-20 bg-[#0d1117] relative scroll-mt-14">
+    <section id={id || "contact"} className="pt-4 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative scroll-mt-14">
       <div className="absolute inset-0 bg-gradient-to-t from-purple-950/10 to-transparent" />
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <motion.div
@@ -98,7 +98,7 @@ export default function ContactSection({ id }) {
 
         {/* Footer */}
         <motion.div
-          className="text-center mt-12 pt-8 border-t border-slate-800/50"
+          className="text-center mt-12 pt-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

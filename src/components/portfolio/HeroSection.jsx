@@ -72,11 +72,11 @@ function StarField() {
 /* ── Typewriter ── */
 // const WORDS = ["Full Stack Developer", "Backend Developer", "MERN Specialist", "Web3 Builder", "API Architect"];
 const WORDS = [
-  "MERN Ecosystem Specialist",
-  "Scalable Backend Developer",
-  "Web3 Infrastructure Builder",
-  // "Full Stack Engineer",
-  // "AI Workflow Integrator"
+  "Scalable Platform Engineer",
+  "High-Performance Systems Engineer",
+  "Real-Time Systems Specialist",
+  "Node.js Infrastructure Architect",
+  "Web3 Integrations Engineer"
 ];
 function Typewriter() {
   const [wIdx, setWIdx] = useState(0);
@@ -128,16 +128,20 @@ function MagneticBtn({ icon: Icon, label, href }) {
       onMouseMove={handleMove}
       onMouseLeave={() => { x.set(0); y.set(0); }}
       whileHover={{ scale: 1.15 }}
-      className="p-3 rounded-xl border border-[#30363d] bg-[#161b22] text-[#8b949e] hover:text-purple-400 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-colors duration-300"
+      className="relative p-3.5 rounded-xl border border-slate-700/50 bg-slate-800/60 backdrop-blur-sm text-slate-400 hover:text-white hover:border-purple-500/50 transition-all duration-300 group overflow-hidden"
     >
-      <Icon className="w-5 h-5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-indigo-500/0 group-hover:from-purple-500/20 group-hover:to-indigo-500/20 transition-all duration-300" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent animate-shimmer" />
+      </div>
+      <Icon className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
     </motion.a>
   );
 }
 
 export default function HeroSection({ id }) {
   return (
-    <section id={id || "home"} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#010409] scroll-mt-14">
+    <section id={id || "home"} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0e1a] scroll-mt-14">
       <StarField />
 
       {/* Ambient glows */}
@@ -206,30 +210,29 @@ export default function HeroSection({ id }) {
           className="text-base sm:text-lg text-[#8b949e] max-w-2xl mx-auto mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}>
-          Crafting scalable MERN applications, RESTful APIs, and Web3 solutions with 30% faster development cycles.
+          Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability.
         </motion.p>
 
         {/* CTA Buttons */}
-        <motion.div className="flex flex-wrap items-center justify-center gap-4 mb-8"
+        <motion.div className="flex flex-wrap items-center justify-center gap-3 mb-8"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}>
           <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(124,58,237,0.5)" }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-7 py-3 font-semibold rounded-xl text-white"
-            style={{ background: "linear-gradient(135deg,#7c3aed,#4f46e5)" }}>
+            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
             <Mail className="w-4 h-4" /> Get in Touch
           </motion.a>
           <motion.a href="/Resume%20(1).pdf" download="Vamsi_Boyana_Resume.pdf"
-            whileHover={{ scale: 1.05, borderColor: "rgba(139,92,246,0.6)" }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-7 py-3 border border-[#30363d] text-[#c9d1d9] font-semibold rounded-xl bg-[#161b22] transition-colors duration-300">
+            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
             <Download className="w-4 h-4" /> Download Resume
           </motion.a>
           <motion.a href="tel:+919642980211"
-            whileHover={{ scale: 1.05, borderColor: "rgba(139,92,246,0.6)" }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-7 py-3 border border-[#30363d] text-[#c9d1d9] font-semibold rounded-xl bg-[#161b22] transition-colors duration-300">
+            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
             <Phone className="w-4 h-4" /> Call Me
           </motion.a>
         </motion.div>
@@ -251,6 +254,17 @@ export default function HeroSection({ id }) {
         <span className="text-[#484f58] text-xs tracking-widest uppercase">Scroll</span>
         <ChevronDown className="w-4 h-4 text-[#484f58]" />
       </motion.div>
+
+      {/* Shimmer animation for social buttons */}
+      <style>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+      `}</style>
     </section>
   );
 }

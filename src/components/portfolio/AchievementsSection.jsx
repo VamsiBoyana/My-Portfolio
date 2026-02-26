@@ -1,0 +1,83 @@
+import { motion } from "framer-motion";
+import { Award, ExternalLink } from "lucide-react";
+
+const certifications = [
+  {
+    title: "MongoDB Node.js Developer Path",
+    issuer: "MongoDB - SmartBridge",
+    date: "June 2025",
+    link: "https://learn.mongodb.com/c/qc2AI7JDRNW_q_fDDee84w",
+    description: "Completed comprehensive training in MongoDB and Node.js development",
+  },
+];
+
+export default function AchievementsSection({ id }) {
+  return (
+    <section id={id || "achievements"} className="pt-8 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.span
+            className="text-purple-400 text-sm font-semibold tracking-widest uppercase mb-3 block"
+            initial={{ letterSpacing: "0.5em" }}
+            whileInView={{ letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Recognition
+          </motion.span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            Achievements & Certifications
+          </h2>
+        </motion.div>
+
+        <div className="grid gap-5">
+          {certifications.map((cert, i) => (
+            <motion.div
+              key={cert.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 hover:border-purple-500/20 transition-all duration-500 group"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-3 rounded-xl bg-purple-500/10 transition-colors">
+                      <Award className="w-5 h-5 text-purple-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">{cert.title}</h3>
+                      <p className="text-slate-400 text-sm">{cert.issuer}</p>
+                    </div>
+                  </div>
+                  <p className="text-slate-300 text-sm mb-3 ml-14">{cert.description}</p>
+                  <div className="flex items-center justify-between ml-14">
+                    <span className="text-slate-500 text-xs">{cert.date}</span>
+                    {cert.link && (
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors"
+                      >
+                        View Certificate
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

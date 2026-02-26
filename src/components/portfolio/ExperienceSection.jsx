@@ -6,7 +6,7 @@ const experiences = [
   {
     company: "String Metaverse Limited",
     role: "Software Developer",
-    period: "January 2025 — Present",
+    period: "February 2025 — Present",
     color: "#c084fc",
     glow: "rgba(192,132,252,0.15)",
     highlights: [
@@ -18,21 +18,21 @@ const experiences = [
   {
     company: "Global Logic Technologies",
     role: "Analyst",
-    period: "September 2023 — January 2025",
+    period: "August 2023 — February 2025",
     color: "#818cf8",
     glow: "rgba(129,140,248,0.15)",
     highlights: [
-      { icon: Zap, title: "Automation", metric: "30%↓", desc: "Manual task reduction via automated workflows enabling real-time KPI updates." },
-      { icon: Monitor, title: "Frontend Eng.", metric: "React", desc: "Built responsive UIs with React.js & Bootstrap across all devices." },
-      { icon: Target, title: "Reporting Accuracy", metric: "20%↑", desc: "Enhanced risk and partner payment tracking features." },
-      { icon: Activity, title: "Dashboards", metric: "Live", desc: "Dynamic business health monitors with complex integrated metrics." },
+      { icon: Zap, title: "Automation", metric: "30%↓", desc: "Developed REST APIs, automated audit workflows, and implemented monitoring to improve accuracy and system reliability." },
+      // { icon: Monitor, title: "Frontend Eng.", metric: "React", desc: "Built responsive UIs with React.js & Bootstrap across all devices." },
+      { icon: Target, title: "Reporting Accuracy", metric: "20%↑", desc: "Built audit-tracking APIs and structured data models to improve reporting accuracy." },
+      { icon: Activity, title: "Dashboards", metric: "Live", desc: "Implemented backend logging and monitoring pipelines to improve system reliability." },
     ],
   },
 ];
 
 export default function ExperienceSection({ id }) {
   return (
-    <section id={id || "experience"} className="pt-8 pb-16 md:pt-20 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+    <section id={id || "experience"} className="pt-8 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
       <motion.div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 30% 60%, rgba(88,28,135,0.1) 0%, transparent 60%)" }}
         animate={{ opacity: [0.4, 0.9, 0.4] }}
