@@ -184,7 +184,15 @@ export default function HeroSection({ id }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 leading-[1.1]">
+          <motion.p
+            className="text-lg sm:text-xl text-slate-400 mb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Hello, I'm
+          </motion.p>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1]">
             <motion.span className="text-white block"
               initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.2 }}>
@@ -201,34 +209,36 @@ export default function HeroSection({ id }) {
         </motion.div>
 
         {/* Typewriter role */}
-        <motion.div className="text-2xl sm:text-3xl font-semibold mb-5 h-10"
+        <motion.div className="text-2xl sm:text-3xl font-semibold mb-6 h-10"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
           <Typewriter />
         </motion.div>
 
         <motion.p
-          className="text-base sm:text-lg text-[#8b949e] max-w-2xl mx-auto mb-8 leading-relaxed"
+          className="text-base sm:text-lg text-[#8b949e] max-w-2xl mx-auto mb-10 leading-relaxed"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}>
-          Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability.
+          {/* Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability. */}
+          I specialize in building scalable Node.js backend architectures, real-time API platforms, and secure Web3 integrations, delivering high performance, reliability, and maintainable system design.
         </motion.p>
 
         {/* CTA Buttons */}
-        <motion.div className="flex flex-wrap items-center justify-center gap-3 mb-8"
+        <motion.div className="flex flex-wrap items-center justify-center gap-3 mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}>
-          <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Mail className="w-4 h-4" /> Get in Touch
-          </motion.a>
           <motion.a href="/Resume%20(1).pdf" download="Vamsi_Boyana_Resume.pdf"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Download className="w-4 h-4" /> Download Resume
+            <Download className="w-4 h-4" /> View Resume
           </motion.a>
+          <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
+            <Mail className="w-4 h-4" /> Contact Me
+          </motion.a>
+
           <motion.a href="tel:+919642980211"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
@@ -238,13 +248,16 @@ export default function HeroSection({ id }) {
         </motion.div>
 
         {/* Social links */}
-        <motion.div className="flex items-center justify-center gap-5"
+        <motion.div className="flex flex-col items-center gap-4"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
-          {[
-            { icon: Github, label: "GitHub", href: "https://github.com/VamsiBoyana" },
-            { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/vamsi-boyana-964550229/" },
-            { icon: Mail, label: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com" },
-          ].map((s) => <MagneticBtn key={s.label} {...s} />)}
+          <p className="text-lg sm:text-xl text-slate-400">Social Links</p>
+          <div className="flex items-center justify-center gap-5">
+            {[
+              { icon: Github, label: "GitHub", href: "https://github.com/VamsiBoyana" },
+              { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/vamsi-boyana-964550229/" },
+              { icon: Mail, label: "Email", href: "https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com" },
+            ].map((s) => <MagneticBtn key={s.label} {...s} />)}
+          </div>
         </motion.div>
       </div>
 

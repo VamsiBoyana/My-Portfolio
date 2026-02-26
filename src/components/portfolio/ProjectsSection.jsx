@@ -103,9 +103,9 @@ export default function ProjectsSection({ id }) {
 
               <div className="p-6 md:p-8 relative z-10">
                 {/* Header */}
-                <div className="flex items-start justify-between mb-2">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2 flex-wrap">
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
                       <span className="text-xs font-bold px-2.5 py-1 rounded-full border"
                         style={{ color: project.color, borderColor: `${project.color}40`, background: `${project.color}10` }}>
                         {project.tag}
@@ -114,14 +114,14 @@ export default function ProjectsSection({ id }) {
                         ⚡ {project.uptime}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{project.title}</h3>
                     {(project.description || project.subtitle) && (
-                      <p className="text-[#8b949e] text-sm mt-2 leading-relaxed max-w-2xl">
+                      <p className="text-[#8b949e] text-sm leading-relaxed">
                         {project.description || project.subtitle}
                       </p>
                     )}
                     {project.tech && project.tech.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-3">
+                      <div className="flex flex-wrap gap-2 mt-4">
                         {project.tech.map((t) => (
                           <span
                             key={t}
@@ -133,7 +133,7 @@ export default function ProjectsSection({ id }) {
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 shrink-0 ml-4">
+                  <div className="flex items-center gap-2 shrink-0">
                     {project.link && (
                       <a
                         href={project.link}
@@ -150,7 +150,7 @@ export default function ProjectsSection({ id }) {
                     <motion.div
                     animate={{ rotate: active === i ? 90 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="p-2 rounded-lg border border-[#21262d] bg-[#0d1117] shrink-0 ml-4"
+                    className="p-2 rounded-lg border border-[#21262d] bg-[#0d1117]"
                     style={{ color: active === i ? project.color : "#8b949e" }}>
                       <ChevronRight className="w-5 h-5" />
                     </motion.div>
