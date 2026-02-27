@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ChevronDown, Download, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { ChevronDown, Download, Github, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 
 /* ── Canvas: stars + shooting stars ── */
 function StarField() {
@@ -72,11 +72,11 @@ function StarField() {
 /* ── Typewriter ── */
 // const WORDS = ["Full Stack Developer", "Backend Developer", "MERN Specialist", "Web3 Builder", "API Architect"];
 const WORDS = [
-  "Scalable Platform Engineer",
-  "High-Performance Systems Engineer",
-  "Real-Time Systems Specialist",
-  "Node.js Infrastructure Architect",
-  "Web3 Integrations Engineer"
+  "Node.js Platform Architect",
+  "Scalable API Systems Builder",
+  "API Infrastructure Developer",
+  "Web3 Platform Integration Specialist",
+  "High-Performance Backend Specialist"
 ];
 function Typewriter() {
   const [wIdx, setWIdx] = useState(0);
@@ -141,7 +141,7 @@ function MagneticBtn({ icon: Icon, label, href }) {
 
 export default function HeroSection({ id }) {
   return (
-    <section id={id || "home"} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0e1a] scroll-mt-14">
+    <section id={id || "home"} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0e1a] scroll-mt-14 py-20 sm:py-0">
       <StarField />
 
       {/* Ambient glows */}
@@ -167,14 +167,14 @@ export default function HeroSection({ id }) {
           transition={{ duration: 3 + i * 0.4, repeat: Infinity, delay: i * 0.3 }} />
       ))}
 
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
         {/* Badge */}
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 mb-6 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 mb-4 sm:mb-6 backdrop-blur-sm text-xs sm:text-sm">
             <motion.span className="w-2 h-2 rounded-full bg-emerald-400"
               animate={{ scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }} />
-            <span className="text-purple-300 text-sm font-medium tracking-wide">Open to opportunities</span>
+            <span className="text-purple-300 font-medium tracking-wide">Open to opportunities</span>
           </div>
         </motion.div>
 
@@ -209,41 +209,45 @@ export default function HeroSection({ id }) {
         </motion.div>
 
         {/* Typewriter role */}
-        <motion.div className="text-2xl sm:text-3xl font-semibold mb-6 h-10"
+        <motion.div className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 h-8 sm:h-10"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
           <Typewriter />
         </motion.div>
 
         <motion.p
-          className="text-base sm:text-lg text-[#8b949e] max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-sm sm:text-base md:text-lg text-[#8b949e] max-w-2xl mx-auto mb-4 sm:mb-6 leading-relaxed"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}>
           {/* Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability. */}
-          I specialize in building scalable Node.js backend architectures, real-time API platforms, and secure Web3 integrations, delivering high performance, reliability, and maintainable system design.
-        </motion.p>
+          {/* I specialize in building scalable Node.js backend architectures, real-time API platforms, and secure Web3 integrations, delivering high performance, reliability, and maintainable system design. */}
+          I focus on building scalable backend architectures and real-time API platforms using Node.js, emphasizing performance, reliability, and maintainable system design.        </motion.p>
+
+        {/* Location */}
+        <motion.div
+          className="flex items-center justify-center gap-2 mb-6 sm:mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+        >
+          <MapPin className="w-4 h-4 text-purple-400" />
+          <span className="text-sm sm:text-base text-slate-400">Hyderabad, Telangana</span>
+        </motion.div>
 
         {/* CTA Buttons */}
-        <motion.div className="flex flex-wrap items-center justify-center gap-3 mb-10"
+        <motion.div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}>
-          <motion.a href="/Resume%20(1).pdf" download="Vamsi_Boyana_Resume.pdf"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Download className="w-4 h-4" /> View Resume
-          </motion.a>
           <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Mail className="w-4 h-4" /> Contact Me
+            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
+            <Mail className="w-3 h-3 sm:w-4 sm:h-4" /> Reach Out
           </motion.a>
-
           <motion.a href="tel:+919642980211"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold rounded-lg text-white text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Phone className="w-4 h-4" /> Call Me
+            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
+            <Phone className="w-3 h-3 sm:w-4 sm:h-4" /> Contact Me
           </motion.a>
         </motion.div>
 
@@ -262,7 +266,7 @@ export default function HeroSection({ id }) {
       </div>
 
       {/* Scroll cue */}
-      <motion.div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+      <motion.div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-50 pointer-events-none"
         animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
         <span className="text-[#484f58] text-xs tracking-widest uppercase">Scroll</span>
         <ChevronDown className="w-4 h-4 text-[#484f58]" />

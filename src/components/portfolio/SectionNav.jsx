@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Home, Code2, Briefcase, FolderGit2, GraduationCap, Award, Mail } from "lucide-react";
+import { Menu, X, Home, Code2, Briefcase, FolderGit2, GraduationCap, Award, Mail, Download } from "lucide-react";
 
 const sections = [
-  { id: "home", label: "Home", icon: Home },
+  { id: "home", label: "About", icon: Home },
   { id: "skills", label: "Skills", icon: Code2 },
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "projects", label: "Projects", icon: FolderGit2 },
@@ -77,24 +77,25 @@ export default function SectionNav() {
             : "border-b border-transparent bg-[#0d1117]/80 backdrop-blur-md"
         }`}
       >
-        <div className="w-full max-w-full mx-auto px-6">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo/Name with gradient - LEFT */}
+        <div className="w-full mx-auto px-5 sm:px-6">
+          <div className="relative flex items-center justify-between h-16 mx-auto px-0">
+            {/* Logo/Name - LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="relative group cursor-pointer flex-shrink-0 mr-auto"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer"
               onClick={() => scrollToSection("home")}
             >
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient hover:from-purple-300 hover:via-pink-300 hover:to-purple-300 transition-all duration-300">
                 Vamsi B
               </span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300" />
             </motion.div>
 
-            {/* Desktop: horizontal links - RIGHT */}
-            <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+            {/* Desktop: horizontal links - CENTER (only on extra large screens) */}
+            <div className="hidden xl:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
               {sections.map((s, idx) => {
                 const Icon = s.icon;
                 const isActive = activeSection === s.id;
@@ -104,34 +105,44 @@ export default function SectionNav() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * idx }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => scrollToSection(s.id)}
-                    className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${
+                    className={`relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                       isActive
-                        ? "text-white bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30"
+                        ? "text-white bg-purple-600 hover:bg-purple-500"
                         : "text-slate-400 hover:text-white hover:bg-slate-800/50"
                     }`}
                   >
-                    <Icon className={`w-4 h-4 transition-transform duration-300 ${isActive ? "text-purple-400" : "group-hover:scale-110"}`} />
+                    <Icon className="w-4 h-4" />
                     <span>{s.label}</span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg -z-10"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
                   </motion.button>
                 );
               })}
             </div>
 
-            {/* Mobile: menu toggle */}
+            {/* Resume Button - RIGHT (only on extra large screens) */}
+            <motion.a
+              href="/Resume%20(1).pdf"
+              download="Vamsi_Boyana_Resume.pdf"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden xl:flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold bg-purple-600 hover:bg-purple-500 text-white transition-all duration-300"
+            >
+              <Download className="w-4 h-4" />
+              <span>View Resume</span>
+            </motion.a>
+
+            {/* Mobile/Tablet: menu toggle */}
             <motion.button
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
               onClick={() => setOpen(!open)}
-              className="md:hidden p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors"
+              className="xl:hidden p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors"
               aria-label="Toggle menu"
             >
               <motion.div
@@ -147,39 +158,86 @@ export default function SectionNav() {
         {/* Mobile dropdown */}
         <motion.div
           initial={false}
-          animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+          animate={{ height: open ? "calc(100vh - 4rem)" : 0, opacity: open ? 1 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`md:hidden overflow-hidden border-t border-slate-800/50 bg-[#0d1117]/98 backdrop-blur-xl ${!open ? 'pointer-events-none' : ''}`}
+          className={`xl:hidden overflow-hidden fixed inset-x-0 top-16 bottom-0 border-t border-slate-800/50 bg-[#0d1117] backdrop-blur-xl ${!open ? 'pointer-events-none' : ''}`}
         >
-          <div className="px-4 py-4 flex flex-col gap-2">
-            {sections.map((s, idx) => {
-              const Icon = s.icon;
-              const isActive = activeSection === s.id;
-              return (
-                <motion.button
-                  key={s.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: open ? 0.05 * idx : 0 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setOpen(false);
-                    setTimeout(() => {
-                      scrollToSection(s.id);
-                    }, 300);
-                  }}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer ${
-                    isActive
-                      ? "text-white bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30"
-                      : "text-slate-400 hover:text-white hover:bg-slate-800/50"
-                  }`}
-                >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-purple-400" : ""}`} />
-                  <span>{s.label}</span>
-                </motion.button>
-              );
-            })}
+          <div className="flex flex-col justify-between h-full px-5 py-3">
+            <div className="flex flex-col gap-1">
+              {sections.map((s, idx) => {
+                const Icon = s.icon;
+                const isActive = activeSection === s.id;
+                return (
+                  <motion.button
+                    key={s.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: open ? 0.05 * idx : 0 }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpen(false);
+                      setTimeout(() => {
+                        scrollToSection(s.id);
+                      }, 300);
+                    }}
+                    className={`flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer ${
+                      isActive
+                        ? "text-white bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30"
+                        : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-purple-400" : ""}`} />
+                    <span>{s.label}</span>
+                  </motion.button>
+                );
+              })}
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-2 pb-2">
+              <motion.a
+                href="/Resume%20(1).pdf"
+                download="Vamsi_Boyana_Resume.pdf"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: open ? 0.05 * sections.length : 0 }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white transition-all duration-300 shadow-lg shadow-purple-500/25"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Download Resume</span>
+              </motion.a>
+              
+              <motion.a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: open ? 0.05 * (sections.length + 1) : 0 }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white transition-all duration-300"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>Get in Touch</span>
+              </motion.a>
+              
+              <motion.a
+                href="tel:+919642980211"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: open ? 0.05 * (sections.length + 2) : 0 }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white transition-all duration-300"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>Call Me</span>
+              </motion.a>
+            </div>
           </div>
         </motion.div>
       </motion.nav>

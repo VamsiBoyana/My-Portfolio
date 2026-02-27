@@ -32,7 +32,7 @@ const experiences = [
 
 export default function ExperienceSection({ id }) {
   return (
-    <section id={id || "experience"} className="pt-8 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+    <section id={id || "experience"} className="pt-8 pb-16 md:pt-12 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
       <motion.div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 30% 60%, rgba(88,28,135,0.1) 0%, transparent 60%)" }}
         animate={{ opacity: [0.4, 0.9, 0.4] }}
@@ -62,8 +62,20 @@ export default function ExperienceSection({ id }) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ boxShadow: `0 0 40px ${exp.glow}` }}
+              whileHover={{ boxShadow: `0 0 60px ${exp.glow}` }}
               className="relative rounded-2xl border border-[#21262d] bg-[#0d1117] overflow-hidden group transition-all duration-500">
+              
+              {/* Animated border gradient on hover */}
+              <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `linear-gradient(135deg, ${exp.glow} 0%, transparent 50%)` }} />
+
+              {/* Top shimmer sweep */}
+              <motion.div
+                className="absolute top-0 left-[-100%] w-full h-0.5 opacity-0 group-hover:opacity-100"
+                style={{ background: `linear-gradient(90deg, transparent, ${exp.color}, transparent)` }}
+                animate={{ left: ["-100%", "200%"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
+              
               {/* Glowing left bar */}
               <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
                 style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)` }}

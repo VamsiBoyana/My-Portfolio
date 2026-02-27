@@ -11,8 +11,8 @@ const skillGroups = [
     glow: "rgba(139,92,246,0.25)",
     border: "hover:border-violet-500/40",
     skills: [
-      { name: "React.js", level: 50 },
-      { name: "HTML/CSS", level: 75 },
+      { name: "React.js", level: 58 },
+      { name: "HTML/CSS", level: 74 },
     ]
   }, {
     title: "Backend",
@@ -35,9 +35,9 @@ const skillGroups = [
     border: "hover:border-emerald-500/40",
     skills: [
       { name: "MongoDB", level: 90 },
-      { name: "MySQL", level: 75 },
+      { name: "MySQL", level: 71 },
       // { name: "SQLite", level: 75 },
-      { name: "Query Optimization", level: 80 },
+      { name: "Query Optimization", level: 78 },
     ],
   },
   {
@@ -47,11 +47,11 @@ const skillGroups = [
     glow: "rgba(245,158,11,0.25)",
     border: "hover:border-amber-500/40",
     skills: [
-      { name: "Git", level: 75 },
+      { name: "Git", level: 71 },
       // { name: "Docker", level: 72 },
       { name: "CI/CD", level: 50 },
-      { name: "Postman", level: 90 },
-      { name: "Swagger", level: 80 }
+      { name: "Postman", level: 92 },
+      { name: "Swagger", level: 83 }
     ],
   },
 ];

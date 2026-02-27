@@ -17,7 +17,7 @@ const links = [
   },
   {
     icon: FileDown,
-    label: "Resume",
+    label: "View Resume",
     value: "Download PDF",
     href: "/Resume%20(1).pdf",
     download: "Vamsi_Boyana_Resume.pdf",
