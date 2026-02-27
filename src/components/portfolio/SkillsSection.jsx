@@ -17,9 +17,9 @@ const skillGroups = [
   }, {
     title: "Backend",
     icon: Server,
-    gradient: "from-violet-500 to-purple-600",
-    glow: "rgba(139,92,246,0.25)",
-    border: "hover:border-violet-500/40",
+    gradient: "from-cyan-400 to-cyan-600",
+    glow: "rgba(56,189,248,0.25)",
+    border: "hover:border-cyan-500/40",
     skills: [
       { name: "Node.js", level: 88 },
       { name: "Express.js", level: 86 },
@@ -78,6 +78,7 @@ function SkillBar({ name, level, color, inView }) {
 
 const colorMap = {
   "from-violet-500 to-purple-600": { from: "#8b5cf6", to: "#9333ea" },
+  "from-cyan-400 to-cyan-600": { from: "#38bdf8", to: "#0891b2" },
   "from-emerald-500 to-teal-600": { from: "#10b981", to: "#0d9488" },
   "from-amber-500 to-orange-600": { from: "#f59e0b", to: "#ea580c" },
 };

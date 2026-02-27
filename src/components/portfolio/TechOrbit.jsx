@@ -123,10 +123,6 @@ export default function TechOrbit() {
       <div className="absolute w-56 h-56 rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 70%)" }} />
 
-      {/* Orbit rings */}
-      <div className="absolute w-72 h-72 rounded-full border border-purple-500/10 pointer-events-none" />
-      <div className="absolute w-56 h-56 rounded-full border border-purple-500/8 pointer-events-none" />
-
       {/* Center label */}
       <div className="absolute flex flex-col items-center z-10 pointer-events-none">
         <div className="text-3xl font-bold bg-clip-text text-transparent"
