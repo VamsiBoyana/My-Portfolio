@@ -7,9 +7,9 @@ const skillGroups = [
   {
     title: "Frontend",
     icon: Server,
-    gradient: "from-violet-500 to-purple-600",
-    glow: "rgba(139,92,246,0.25)",
-    border: "hover:border-violet-500/40",
+    gradient: "from-pink-500 to-rose-600",
+    glow: "rgba(236,72,153,0.25)",
+    border: "hover:border-pink-500/40",
     skills: [
       { name: "React.js", level: 58 },
       { name: "HTML/CSS", level: 74 },
@@ -51,7 +51,7 @@ const skillGroups = [
       // { name: "Docker", level: 72 },
       { name: "CI/CD", level: 50 },
       { name: "Postman", level: 92 },
-      { name: "Swagger", level: 83 }
+      { name: "Swagger", level: 80 }
     ],
   },
 ];
@@ -60,10 +60,10 @@ function SkillBar({ name, level, color, inView }) {
   return (
     <div className="mb-3">
       <div className="flex justify-between text-xs mb-1">
-        <span className="text-[#c9d1d9]">{name}</span>
-        <span className="text-[#484f58]">{level}%</span>
+        <span className="text-slate-300 font-medium">{name}</span>
+        <span className="text-slate-400 font-semibold">{level}%</span>
       </div>
-      <div className="h-1.5 rounded-full bg-[#21262d] overflow-hidden">
+      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: `linear-gradient(90deg, ${color.from}20, ${color.to}20)` }}>
         <motion.div
           className="h-full rounded-full"
           style={{ background: `linear-gradient(90deg, ${color.from}, ${color.to})` }}
@@ -77,7 +77,7 @@ function SkillBar({ name, level, color, inView }) {
 }
 
 const colorMap = {
-  "from-violet-500 to-purple-600": { from: "#8b5cf6", to: "#9333ea" },
+  "from-pink-500 to-rose-600": { from: "#ec4899", to: "#e11d48" },
   "from-cyan-400 to-cyan-600": { from: "#38bdf8", to: "#0891b2" },
   "from-emerald-500 to-teal-600": { from: "#10b981", to: "#0d9488" },
   "from-amber-500 to-orange-600": { from: "#f59e0b", to: "#ea580c" },
@@ -138,6 +138,25 @@ export default function SkillsSection({ id }) {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: `radial-gradient(circle at 50% 0%, ${group.glow} 0%, transparent 60%)` }} />
 
+                {/* Animated border gradient on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(135deg, ${color.from}40, ${color.to}40)`,
+                    padding: '1px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude'
+                  }} />
+
+                {/* Top shimmer sweep line */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 pointer-events-none overflow-hidden">
+                  <div className="absolute inset-0 animate-shimmer-sweep"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${color.from}, ${color.to}, transparent)`,
+                      width: '200%',
+                    }} />
+                </div>
+
                 <motion.div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${group.gradient} mb-4`}
                   whileHover={{ rotate: [0, -10, 10, 0] }}
                   transition={{ duration: 0.5 }}>
@@ -154,6 +173,17 @@ export default function SkillsSection({ id }) {
           })}
         </div>
       </div>
+
+      {/* Shimmer sweep animation */}
+      <style>{`
+        @keyframes shimmer-sweep {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer-sweep {
+          animation: shimmer-sweep 2s infinite;
+        }
+      `}</style>
     </section>
   );
 }

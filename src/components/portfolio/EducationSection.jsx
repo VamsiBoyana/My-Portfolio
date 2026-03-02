@@ -7,7 +7,7 @@ const education = [
     degree: "Bachelor of Technology (EEE)",
     institution: "Dadi Institute of Engineering and Technology (JNTUK)",
     period: "July 2018 — June 2022",
-    grade: "CGPA: 7.25",
+    grade: "CGPA: 7.3",
     icon: GraduationCap,
   },
   {

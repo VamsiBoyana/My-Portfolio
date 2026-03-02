@@ -9,17 +9,23 @@ function StarField() {
     const canvas = ref.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    
+    let stars = [];
+    
+    const resize = () => { 
+      canvas.width = window.innerWidth; 
+      canvas.height = window.innerHeight;
+      // Regenerate stars on resize to fill new dimensions
+      stars = Array.from({ length: 300 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.005 + 0.001,
+      }));
+    };
     resize();
     window.addEventListener("resize", resize);
-
-    const stars = Array.from({ length: 250 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.4 + 0.2,
-      a: Math.random(),
-      speed: Math.random() * 0.005 + 0.001,
-    }));
 
     const shooters = [];
     const spawnShooter = () => {
@@ -170,7 +176,7 @@ export default function HeroSection({ id }) {
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto w-full">
         {/* Badge */}
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}>
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 mb-3 sm:mb-4 md:mb-6 backdrop-blur-sm text-xs sm:text-sm">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 mb-3 sm:mb-4 md:mb-5 backdrop-blur-sm text-xs sm:text-sm">
             <motion.span className="w-2 h-2 rounded-full bg-emerald-400"
               animate={{ scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }} />
@@ -185,14 +191,14 @@ export default function HeroSection({ id }) {
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-slate-400 mb-2"
+            className="text-sm sm:text-base md:text-lg text-slate-400 mb-1.5 sm:mb-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Hello, I'm
           </motion.p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-4 sm:mb-5 md:mb-6 leading-[1.1]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-2.5 sm:mb-3 md:mb-4 leading-[1.1]">
             <motion.span className="text-white block"
               initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.2 }}>
@@ -209,13 +215,13 @@ export default function HeroSection({ id }) {
         </motion.div>
 
         {/* Typewriter role */}
-        <motion.div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4 md:mb-6 h-7 sm:h-8 md:h-10"
+        <motion.div className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-3 sm:mb-4 md:mb-5 h-5 sm:h-6 md:h-7 lg:h-8"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
           <Typewriter />
         </motion.div>
 
         <motion.p
-          className="text-sm sm:text-base md:text-lg text-[#8b949e] max-w-2xl mx-auto mb-3 sm:mb-4 md:mb-6 leading-relaxed px-2"
+          className="text-xs sm:text-sm md:text-base text-[#8b949e] max-w-3xl mx-auto mb-4 sm:mb-5 md:mb-6 leading-relaxed px-4"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}>
           {/* Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability. */}
@@ -224,38 +230,38 @@ export default function HeroSection({ id }) {
 
         {/* Location */}
         <motion.div
-          className="flex items-center justify-center gap-2 mb-4 sm:mb-6 md:mb-10"
+          className="flex items-center justify-center gap-1.5 sm:gap-2 mb-4 sm:mb-5 md:mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
-          <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
+          <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-purple-400" />
           <span className="text-xs sm:text-sm md:text-base text-slate-400">Hyderabad, Telangana</span>
         </motion.div>
 
         {/* CTA Buttons */}
-        <motion.div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-10"
+        <motion.div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-5 md:mb-6"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}>
           <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=vamsiboina1800@gmail.com"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Mail className="w-3 h-3 sm:w-4 sm:h-4" /> Reach Out
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
+            <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Reach Out
           </motion.a>
           <motion.a href="tel:+919642980211"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
-            <Phone className="w-3 h-3 sm:w-4 sm:h-4" /> Contact Me
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
+            <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Contact Me
           </motion.a>
         </motion.div>
 
         {/* Social links */}
-        <motion.div className="flex flex-col items-center gap-4"
+        <motion.div className="flex flex-col items-center gap-2.5 sm:gap-3 md:gap-4"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
-          <p className="text-lg sm:text-xl text-slate-400">Social Links</p>
-          <div className="flex items-center justify-center gap-5">
+          <p className="text-base sm:text-lg text-slate-400">Social Links</p>
+          <div className="flex items-center justify-center gap-4 sm:gap-5">
             {[
               { icon: Github, label: "GitHub", href: "https://github.com/VamsiBoyana" },
               { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/vamsi-boyana-964550229/" },
