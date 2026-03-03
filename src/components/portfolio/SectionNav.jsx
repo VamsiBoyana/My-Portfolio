@@ -17,7 +17,7 @@ function scrollToSection(id) {
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-export default function SectionNav() {
+export default function SectionNav({ onMenuToggle }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -65,6 +65,24 @@ export default function SectionNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Notify parent component about menu state
+    if (onMenuToggle) {
+      onMenuToggle(open);
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open, onMenuToggle]);
+
   return (
     <>
       <motion.nav
@@ -73,12 +91,12 @@ export default function SectionNav() {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-slate-800/80 bg-[#0d1117]/98 backdrop-blur-xl shadow-lg shadow-black/20"
-            : "border-b border-transparent bg-[#0d1117]/80 backdrop-blur-md"
+            ? "border-b border-slate-800/80 bg-[#0B1120]/98 backdrop-blur-xl shadow-lg shadow-black/20"
+            : "border-b border-transparent bg-[#0B1120]/80 backdrop-blur-md"
         }`}
       >
-        <div className="w-full mx-auto px-5 sm:px-6">
-          <div className="relative flex items-center justify-between h-16 mx-auto px-0">
+        <div className="w-full px-5 sm:px-6">
+          <div className="relative flex items-center justify-between h-16 px-0">
             {/* Logo/Name - LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -226,7 +244,7 @@ export default function SectionNav() {
               </motion.a>
               
               <motion.a
-                href="tel:+919642980211"
+                href="tel:+919581024460"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: open ? 0.05 * (sections.length + 2) : 0 }}

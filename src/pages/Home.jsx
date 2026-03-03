@@ -13,6 +13,7 @@ import ContactSection from "@/components/portfolio/ContactSection";
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#0B1120] min-h-screen">
-      <SectionNav />
+      <SectionNav onMenuToggle={setIsNavOpen} />
       <HeroSection id="home" />
       <StatsBar />
       <SkillsSection id="skills" />
@@ -41,7 +42,7 @@ export default function Home() {
 
       {/* Go to Top Button */}
       <AnimatePresence>
-        {showScrollTop && (
+        {showScrollTop && !isNavOpen && (
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}

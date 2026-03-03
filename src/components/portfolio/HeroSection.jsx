@@ -249,7 +249,7 @@ export default function HeroSection({ id }) {
             className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
             <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Reach Out
           </motion.a>
-          <motion.a href="tel:+919642980211"
+          <motion.a href="tel:+919581024460"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 font-semibold rounded-lg text-white text-xs sm:text-sm bg-gradient-to-r from-purple-500/80 to-indigo-500/80 hover:from-purple-500 hover:to-indigo-500 shadow-md shadow-purple-500/15 transition-all duration-300">
@@ -272,9 +272,9 @@ export default function HeroSection({ id }) {
       </div>
 
       {/* Scroll cue */}
-      <motion.div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-50 pointer-events-none"
+      <motion.div className="hidden xl:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center justify-center gap-1 z-50 pointer-events-none"
         animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-        <span className="text-[#484f58] text-xs tracking-widest uppercase">Scroll</span>
+        <span className="text-[#484f58] text-xs tracking-widest uppercase text-center">Scroll</span>
         <ChevronDown className="w-4 h-4 text-[#484f58]" />
       </motion.div>
 
