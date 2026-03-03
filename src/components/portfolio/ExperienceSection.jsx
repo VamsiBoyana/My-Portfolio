@@ -130,7 +130,7 @@ export default function ExperienceSection({ id }) {
                               {h.metric}
                             </span>
                           </div>
-                          <p className="text-[#8b949e] text-xs leading-relaxed">{h.desc}</p>
+                          <p className="text-[#8b949e] text-sm leading-relaxed">{h.desc}</p>
                         </div>
                       </motion.div>
                     );

@@ -198,15 +198,19 @@ export default function HeroSection({ id }) {
           >
             Hello, I'm
           </motion.p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-2.5 sm:mb-3 md:mb-4 leading-[1.1]">
-            <motion.span className="text-white block"
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-2.5 sm:mb-3 md:mb-4 leading-[1.1]">
+            <motion.span className="text-white block drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
               initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.2 }}>
               Vamsi
             </motion.span>
             <motion.span
-              className="block bg-clip-text text-transparent"
-              style={{ backgroundImage: "linear-gradient(135deg,#c084fc 0%,#818cf8 50%,#38bdf8 100%)" }}
+              className="block bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(192,132,252,0.5)]"
+              style={{ 
+                backgroundImage: "linear-gradient(135deg, #c084fc 0%, #a855f7 25%, #818cf8 50%, #6366f1 75%, #38bdf8 100%)",
+                backgroundSize: "200% auto",
+                animation: "gradient-shift 3s ease infinite"
+              }}
               initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.35 }}>
               Boyana
@@ -221,7 +225,7 @@ export default function HeroSection({ id }) {
         </motion.div>
 
         <motion.p
-          className="text-xs sm:text-sm md:text-base text-[#8b949e] max-w-3xl mx-auto mb-4 sm:mb-5 md:mb-6 leading-relaxed px-4"
+          className="text-sm sm:text-base md:text-lg lg:text-xl text-[#8b949e] max-w-3xl mx-auto mb-4 sm:mb-5 md:mb-6 leading-relaxed px-4"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}>
           {/* Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability. */}
@@ -272,7 +276,7 @@ export default function HeroSection({ id }) {
       </div>
 
       {/* Scroll cue */}
-      <motion.div className="hidden xl:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center justify-center gap-1 z-50 pointer-events-none"
+      <motion.div className="flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center justify-center gap-1 z-50 pointer-events-none"
         animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
         <span className="text-[#484f58] text-xs tracking-widest uppercase text-center">Scroll</span>
         <ChevronDown className="w-4 h-4 text-[#484f58]" />
@@ -286,6 +290,10 @@ export default function HeroSection({ id }) {
         }
         .animate-shimmer {
           animation: shimmer 2s infinite;
+        }
+        @keyframes gradient-shift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
       `}</style>
     </section>

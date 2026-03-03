@@ -96,7 +96,7 @@ export default function SectionNav({ onMenuToggle }) {
         }`}
       >
         <div className="w-full px-5 sm:px-6">
-          <div className="relative flex items-center justify-between h-16 px-0">
+          <div className="relative flex items-center justify-between h-14 px-0">
             {/* Logo/Name - LEFT */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -159,9 +159,14 @@ export default function SectionNav({ onMenuToggle }) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              onClick={() => setOpen(!open)}
-              className="xl:hidden p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setOpen(!open);
+              }}
+              className="xl:hidden p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors touch-manipulation"
               aria-label="Toggle menu"
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <motion.div
                 animate={{ rotate: open ? 90 : 0 }}
@@ -176,9 +181,9 @@ export default function SectionNav({ onMenuToggle }) {
         {/* Mobile dropdown */}
         <motion.div
           initial={false}
-          animate={{ height: open ? "calc(100vh - 4rem)" : 0, opacity: open ? 1 : 0 }}
+          animate={{ height: open ? "calc(100vh - 3.5rem)" : 0, opacity: open ? 1 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`xl:hidden overflow-hidden fixed inset-x-0 top-16 bottom-0 border-t border-slate-800/50 bg-[#0d1117] backdrop-blur-xl ${!open ? 'pointer-events-none' : ''}`}
+          className={`xl:hidden overflow-hidden fixed inset-x-0 top-14 bottom-0 border-t border-slate-800/50 bg-[#0B1120] backdrop-blur-xl ${!open ? 'pointer-events-none' : ''}`}
         >
           <div className="flex flex-col justify-between h-full px-5 py-3">
             <div className="flex flex-col gap-1">
