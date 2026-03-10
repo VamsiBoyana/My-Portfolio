@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, ExternalLink } from "lucide-react";
+import StarField from "@/components/ui/StarField";
 
 const certifications = [
   {
@@ -14,6 +15,7 @@ const certifications = [
 export default function AchievementsSection({ id }) {
   return (
     <section id={id || "achievements"} className="pt-8 pb-16 md:pt-12 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+      <StarField />
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           className="text-center mb-10"

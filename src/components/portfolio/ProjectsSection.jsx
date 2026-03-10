@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layers, Shield, RefreshCw, Bot, Lock, Code, ExternalLink, ChevronRight } from "lucide-react";
+import StarField from "@/components/ui/StarField";
 
 // Richer project shape: title, description, tech[], tag, uptime, link or github/liveUrl, highlights[].
 const projects = [
@@ -57,6 +58,7 @@ export default function ProjectsSection({ id }) {
 
   return (
     <section id={id || "projects"} className="pt-8 pb-6 md:pt-2 md:pb-8 bg-[#010409] relative overflow-hidden scroll-mt-14">
+      <StarField />
       <motion.div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 70% 40%, rgba(88,28,135,0.1) 0%, transparent 60%)" }}
         animate={{ opacity: [0.4, 1, 0.4] }}
@@ -74,7 +76,7 @@ export default function ProjectsSection({ id }) {
             whileInView={{ letterSpacing: "0.3em" }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}>
-            Portfolio
+            Projects
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold text-white">Key Projects</h2>
         </motion.div>

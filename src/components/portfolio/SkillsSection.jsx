@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Database, Server, Cloud } from "lucide-react";
 import TechOrbit from "./TechOrbit";
+import StarField from "@/components/ui/StarField";
 
 const skillGroups = [
   {
@@ -11,7 +12,7 @@ const skillGroups = [
     glow: "rgba(236,72,153,0.25)",
     border: "hover:border-pink-500/40",
     skills: [
-      { name: "React.js", level: 58 },
+      { name: "React.js", level: 60 },
       { name: "HTML/CSS", level: 72 },
     ]
   }, {
@@ -87,6 +88,7 @@ export default function SkillsSection({ id }) {
   const [inView, setInView] = useState(false);
   return (
     <section id={id || "skills"} className="pt-6 pb-16 md:pt-12 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+      <StarField />
       {/* background glow pulse */}
       <motion.div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(88,28,135,0.08) 0%, transparent 70%)" }}

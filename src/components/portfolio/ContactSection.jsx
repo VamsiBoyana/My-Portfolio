@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Github, Linkedin, ArrowUpRight, FileDown } from "lucide-react";
+import StarField from "@/components/ui/StarField";
 
 const links = [
   {
@@ -39,6 +40,7 @@ const links = [
 export default function ContactSection({ id }) {
   return (
     <section id={id || "contact"} className="pt-4 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative scroll-mt-14">
+      <StarField />
       <div className="absolute inset-0 bg-gradient-to-t from-purple-950/10 to-transparent" />
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <motion.div

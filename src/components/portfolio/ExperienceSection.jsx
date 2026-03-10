@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Briefcase, TrendingUp, BarChart3, Brain, Zap, Monitor, Target, Activity } from "lucide-react";
+import StarField from "@/components/ui/StarField";
 
 const experiences = [
   {
@@ -33,6 +34,7 @@ const experiences = [
 export default function ExperienceSection({ id }) {
   return (
     <section id={id || "experience"} className="pt-8 pb-16 md:pt-12 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+      <StarField />
       <motion.div className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 30% 60%, rgba(88,28,135,0.1) 0%, transparent 60%)" }}
         animate={{ opacity: [0.4, 0.9, 0.4] }}

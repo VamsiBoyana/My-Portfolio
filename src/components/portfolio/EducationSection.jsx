@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GraduationCap, BookOpen } from "lucide-react";
+import StarField from "@/components/ui/StarField";
 
 const education = [
   {
@@ -22,6 +23,7 @@ const education = [
 export default function EducationSection({ id }) {
   return (
     <section id={id || "education"} className="pt-8 pb-16 md:pt-16 md:pb-20 bg-[#010409] relative overflow-hidden scroll-mt-14">
+      <StarField />
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           className="text-center mb-10"
