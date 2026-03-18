@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layers, Shield, RefreshCw, Bot, Lock, Code, ExternalLink, ChevronRight } from "lucide-react";
+import { Layers, Shield, RefreshCw, Bot, Lock, Code, ChevronRight } from "lucide-react";
 import StarField from "@/components/ui/StarField";
 
 // Richer project shape: title, description, tech[], tag, uptime, link or github/liveUrl, highlights[].
@@ -136,19 +136,6 @@ export default function ProjectsSection({ id }) {
                     )}
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="p-2 rounded-lg border border-[#21262d] bg-[#0d1117] hover:border-[#30363d] transition-colors"
-                        style={{ color: project.color }}
-                        title="View project"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                      </a>
-                    )}
                     <motion.div
                     animate={{ rotate: active === i ? 90 : 0 }}
                     transition={{ duration: 0.3 }}

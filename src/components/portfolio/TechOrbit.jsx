@@ -83,6 +83,14 @@ const TechIcons = {
       <path d="M8 20 v8 c0 3 5.4 5 12 5s12-2 12-5v-8" stroke="#00758F" strokeWidth="1.5" fill="none" />
     </svg>
   ),
+  PostgreSQL: ({ size = 40 }) => (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      <ellipse cx="20" cy="13" rx="11" ry="5" stroke="#336791" strokeWidth="1.5" fill="none" />
+      <path d="M9 13 v9 c0 3 5 5 11 5s11-2 11-5v-9" stroke="#336791" strokeWidth="1.5" fill="none" />
+      <path d="M27 17 c3-1 5 1 5 4 s-2 4-5 3" stroke="#336791" strokeWidth="1.5" fill="none" />
+      <text x="20" y="32" textAnchor="middle" fill="#336791" fontSize="6" fontWeight="bold">PG</text>
+    </svg>
+  ),
 };
 
 // const techList = [
@@ -99,80 +107,113 @@ const TechIcons = {
 
 const techList = [
   // Frontend
-  { Icon: TechIcons.HTML, label: "HTML", color: "#E34F26", angle: 0 },
-  { Icon: TechIcons.CSS, label: "CSS", color: "#1572B6", angle: 40 },
-  { Icon: TechIcons.JavaScript, label: "JS", color: "#F7DF1E", angle: 80 },
-  { Icon: TechIcons.React, label: "React", color: "#61DAFB", angle: 120 },
-
+  { Icon: TechIcons.HTML,       label: "HTML",    color: "#E34F26", angle: 0   },
+  { Icon: TechIcons.CSS,        label: "CSS",     color: "#1572B6", angle: 36  },
+  { Icon: TechIcons.JavaScript, label: "JS",      color: "#F7DF1E", angle: 72  },
+  { Icon: TechIcons.React,      label: "React",   color: "#61DAFB", angle: 108 },
   // Backend
-  { Icon: TechIcons.Node, label: "Node", color: "#68A063", angle: 160 },
-  { Icon: TechIcons.Express, label: "Express", color: "#ffffff", angle: 200 },
-
+  { Icon: TechIcons.Node,       label: "Node",    color: "#68A063", angle: 144 },
+  { Icon: TechIcons.Express,    label: "Express", color: "#ffffff", angle: 180 },
   // Database
-  { Icon: TechIcons.MongoDB, label: "Mongo", color: "#4DB33D", angle: 240 },
-  { Icon: TechIcons.MySQL, label: "MySQL", color: "#00758F", angle: 280 },
-
+  { Icon: TechIcons.MongoDB,    label: "Mongo",   color: "#4DB33D", angle: 216 },
+  { Icon: TechIcons.PostgreSQL, label: "PgSQL",   color: "#336791", angle: 252 },
+  { Icon: TechIcons.MySQL,      label: "MySQL",   color: "#00758F", angle: 288 },
   // Tools
-  { Icon: TechIcons.Git, label: "Git", color: "#F05032", angle: 320 },
+  { Icon: TechIcons.Git,        label: "Git",     color: "#F05032", angle: 324 },
 ];
 
 export default function TechOrbit() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const r         = isMobile ? 110 : 170;
+  const orbitSize = isMobile ? 260  : 384;
+  const iconSize  = isMobile ? 40   : 56;
+  const iconInner = isMobile ? 22   : 32;
+  const offset    = iconSize / 2;
+
   return (
-    <div className="relative w-full flex justify-center items-center py-12 overflow-hidden select-none" style={{ minHeight: 450 }}>
+    <div
+      className="relative w-full flex justify-center items-center overflow-hidden select-none"
+      style={{ minHeight: isMobile ? 320 : 520, padding: `${isMobile ? 24 : 48}px 0` }}
+    >
       {/* Central glow */}
-      <div className="absolute w-56 h-56 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 70%)" }} />
+      <div className="absolute rounded-full pointer-events-none"
+        style={{
+          width: isMobile ? 160 : 280,
+          height: isMobile ? 160 : 280,
+          background: "radial-gradient(circle, rgba(139,92,246,0.22) 0%, transparent 70%)"
+        }} />
 
       {/* Center label */}
       <div className="absolute flex flex-col items-center z-10 pointer-events-none">
-        <div className="text-3xl font-bold bg-clip-text text-transparent"
-          style={{ backgroundImage: "linear-gradient(135deg,#c084fc,#818cf8,#38bdf8)" }}>
+        <div
+          className="font-bold bg-clip-text text-transparent"
+          style={{
+            fontSize: isMobile ? 24 : 36,
+            backgroundImage: "linear-gradient(135deg,#c084fc,#818cf8,#38bdf8)"
+          }}>
           &lt;/&gt;
         </div>
-        <span className="text-[#484f58] text-xs mt-1">Tech Stack</span>
+        <span className="text-[#484f58] mt-1" style={{ fontSize: isMobile ? 10 : 13 }}>Tech Stack</span>
       </div>
 
       {/* Rotating orbit */}
       <motion.div
-        className="absolute w-72 h-72"
+        className="absolute"
+        style={{ width: orbitSize, height: orbitSize }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
       >
         {techList.map(({ Icon, label, color, angle }) => {
           const rad = (angle * Math.PI) / 180;
-          const r = 130;
           const x = Math.cos(rad) * r;
           const y = Math.sin(rad) * r;
           return (
             <motion.div
               key={label}
               className="absolute flex flex-col items-center cursor-pointer"
-              style={{ left: `calc(50% + ${x}px - 24px)`, top: `calc(50% + ${y}px - 24px)`, width: 48 }}
+              style={{ left: `calc(50% + ${x}px - ${offset}px)`, top: `calc(50% + ${y}px - ${offset}px)`, width: iconSize }}
               animate={{ rotate: -360 }}
-              transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
               whileHover={{ scale: 1.4, filter: `drop-shadow(0 0 10px ${color})`, zIndex: 20 }}
             >
-              {/* 3D card face */}
               <motion.div
-                className="w-12 h-12 rounded-xl flex items-center justify-center relative overflow-hidden"
                 style={{
-                  background: `linear-gradient(145deg, ${color}20, ${color}08)`,
-                  border: `1px solid ${color}40`,
-                  boxShadow: `0 4px 20px ${color}20, inset 0 1px 0 ${color}30`,
+                  width: iconSize,
+                  height: iconSize,
+                  borderRadius: isMobile ? 10 : 14,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative",
+                  overflow: "hidden",
+                  background: `linear-gradient(145deg, ${color}25, ${color}0a)`,
+                  border: `1px solid ${color}50`,
+                  boxShadow: `0 4px 20px ${color}25, inset 0 1px 0 ${color}35`,
                   transform: "perspective(200px) rotateX(15deg)",
                 }}
                 whileHover={{
                   transform: "perspective(200px) rotateX(0deg) rotateY(15deg) scale(1.1)",
-                  boxShadow: `0 8px 30px ${color}50, inset 0 1px 0 ${color}60`,
+                  boxShadow: `0 8px 30px ${color}55`,
                 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Shine overlay */}
-                <div className="absolute inset-0 pointer-events-none rounded-xl"
+                <div className="absolute inset-0 pointer-events-none"
                   style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%)" }} />
-                <Icon size={28} />
+                <Icon size={iconInner} />
               </motion.div>
-              <span className="text-[9px] mt-1 font-semibold" style={{ color }}>{label}</span>
+              <span
+                className="font-semibold text-center leading-tight"
+                style={{ color, fontSize: isMobile ? 8 : 10, marginTop: isMobile ? 3 : 5 }}>
+                {label}
+              </span>
             </motion.div>
           );
         })}

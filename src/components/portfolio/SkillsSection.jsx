@@ -36,6 +36,7 @@ const skillGroups = [
     border: "hover:border-emerald-500/40",
     skills: [
       { name: "MongoDB", level: 90 },
+      { name: "PostgreSQL", level: 75 },
       { name: "MySQL", level: 71 },
       // { name: "SQLite", level: 75 },
       { name: "Query Optimization", level: 76 },

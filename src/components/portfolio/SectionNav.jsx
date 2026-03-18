@@ -151,7 +151,7 @@ export default function SectionNav({ onMenuToggle }) {
               className="hidden xl:flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold bg-purple-600 hover:bg-purple-500 text-white transition-all duration-300"
             >
               <Download className="w-4 h-4" />
-              <span>View Resume</span>
+              <span>Get My Resume</span>
             </motion.a>
 
             {/* Mobile/Tablet: menu toggle */}
