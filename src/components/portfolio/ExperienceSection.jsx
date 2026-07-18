@@ -96,12 +96,8 @@ function ExperienceCard({ exp, index }) {
         transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
 
       {/* Glowing left bar */}
-      <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-        style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)`, boxShadow: `0 0 16px ${exp.color}` }}
-        initial={{ scaleY: 0, originY: 0 }}
-        whileInView={{ scaleY: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.3 }} />
+      <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+        style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)`, boxShadow: `0 0 16px ${exp.color}` }} />
 
       {/* Card shine */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"

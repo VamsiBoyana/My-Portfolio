@@ -75,12 +75,8 @@ export default function EducationSection({ id }) {
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
 
                 {/* Glowing left bar */}
-                <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-                  style={{ background: `linear-gradient(to bottom, ${edu.color}, transparent)` }}
-                  initial={{ scaleY: 0, originY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3 }} />
+                <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+                  style={{ background: `linear-gradient(to bottom, ${edu.color}, transparent)` }} />
 
                 <div className="relative z-10">
                   <div className="p-3 rounded-xl w-fit mb-4" style={{ background: `${edu.color}1a` }}>

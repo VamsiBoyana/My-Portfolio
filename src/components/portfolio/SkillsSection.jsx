@@ -138,12 +138,8 @@ export default function SkillsSection({ id }) {
                 whileHover={{ y: -6, boxShadow: `0 20px 60px ${group.glow}` }}
                 className={`relative group rounded-2xl border border-[#21262d] bg-[#161b22] backdrop-blur-sm p-6 pl-7 ${group.border} transition-all duration-400 cursor-default overflow-hidden`}>
                 {/* Glowing left bar */}
-                <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-                  style={{ background: `linear-gradient(to bottom, ${color.from}, transparent)` }}
-                  initial={{ scaleY: 0, originY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3 }} />
+                <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+                  style={{ background: `linear-gradient(to bottom, ${color.from}, transparent)` }} />
 
                 {/* card shine on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
