@@ -93,3 +93,8 @@
     color: hsl(var(--foreground));
   }
 }
+
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}

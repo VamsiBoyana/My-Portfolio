@@ -107,7 +107,7 @@ export default function SectionNav({ onMenuToggle }) {
               className="cursor-pointer"
               onClick={() => scrollToSection("home")}
             >
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient hover:from-purple-300 hover:via-pink-300 hover:to-purple-300 transition-all duration-300">
+              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-shift hover:from-purple-300 hover:via-pink-300 hover:to-purple-300 transition-all duration-300">
                 Vamsi B
               </span>
             </motion.div>
@@ -264,17 +264,6 @@ export default function SectionNav({ onMenuToggle }) {
           </div>
         </motion.div>
       </motion.nav>
-
-      {/* Add gradient animation keyframes */}
-      <style>{`
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
     </>
   );
 }

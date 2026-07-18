@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ChevronDown, Download, Github, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 
 /* ── Canvas: stars + shooting stars ── */
@@ -78,6 +78,7 @@ function StarField() {
 /* ── Typewriter ── */
 // const WORDS = ["Full Stack Developer", "Backend Developer", "MERN Specialist", "Web3 Builder", "API Architect"];
 const WORDS = [
+  "MERN Stack Developer (Backend Focused)",
   "Node.js Platform Architect",
   "Scalable API Systems Builder",
   "API Infrastructure Developer",
@@ -138,7 +139,7 @@ function MagneticBtn({ icon: Icon, label, href }) {
     >
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-indigo-500/0 group-hover:from-purple-500/20 group-hover:to-indigo-500/20 transition-all duration-300" />
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent animate-shimmer" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent animate-shimmer-sweep" />
       </div>
       <Icon className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
     </motion.a>
@@ -146,21 +147,38 @@ function MagneticBtn({ icon: Icon, label, href }) {
 }
 
 export default function HeroSection({ id }) {
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const parallaxX = useSpring(pointerX, { stiffness: 40, damping: 20 });
+  const parallaxY = useSpring(pointerY, { stiffness: 40, damping: 20 });
+  const glow1X = useTransform(parallaxX, (v) => v * 1);
+  const glow1Y = useTransform(parallaxY, (v) => v * 1);
+  const glow2X = useTransform(parallaxX, (v) => v * -0.6);
+  const glow2Y = useTransform(parallaxY, (v) => v * -0.6);
+  const glow3X = useTransform(parallaxX, (v) => v * 0.4);
+  const glow3Y = useTransform(parallaxY, (v) => v * 0.4);
+
+  const handlePointerMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    pointerX.set(((e.clientX - rect.left) / rect.width - 0.5) * 30);
+    pointerY.set(((e.clientY - rect.top) / rect.height - 0.5) * 30);
+  };
+
   return (
-    <section id={id || "home"} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#010409] scroll-mt-14 py-20 sm:py-0">
+    <section id={id || "home"} onMouseMove={handlePointerMove} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#010409] scroll-mt-14 py-20 sm:py-0">
       <StarField />
 
       {/* Ambient glows */}
       <motion.div className="absolute top-[15%] left-[25%] w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(88,28,135,0.5) 0%, transparent 65%)" }}
-        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5], x: [0, 30, 0], y: [0, -20, 0] }}
+        style={{ background: "radial-gradient(circle, rgba(88,28,135,0.5) 0%, transparent 65%)", x: glow1X, y: glow1Y }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} />
       <motion.div className="absolute bottom-[5%] right-[15%] w-[450px] h-[450px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(79,70,229,0.35) 0%, transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, rgba(79,70,229,0.35) 0%, transparent 65%)", x: glow2X, y: glow2Y }}
         animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0.8, 0.3] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
       <motion.div className="absolute top-[50%] right-[30%] w-[350px] h-[350px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 65%)", x: glow3X, y: glow3Y }}
         animate={{ scale: [1, 1.15, 1] }}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 5 }} />
 
@@ -205,11 +223,10 @@ export default function HeroSection({ id }) {
               Vamsi
             </motion.span>
             <motion.span
-              className="block bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(192,132,252,0.5)]"
-              style={{ 
+              className="block bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(192,132,252,0.5)] animate-gradient-shift"
+              style={{
                 backgroundImage: "linear-gradient(135deg, #c084fc 0%, #a855f7 25%, #818cf8 50%, #6366f1 75%, #38bdf8 100%)",
                 backgroundSize: "200% auto",
-                animation: "gradient-shift 3s ease infinite"
               }}
               initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.35 }}>
@@ -229,8 +246,8 @@ export default function HeroSection({ id }) {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}>
           {/* Designing scalable Node.js backend systems with real-time APIs and secure Web3 integrations - built for performance and reliability. */}
-          {/* I specialize in building scalable Node.js backend architectures, real-time API platforms, and secure Web3 integrations, delivering high performance, reliability, and maintainable system design. */}
-          I focus on building scalable backend architectures and real-time API platforms using Node.js, emphasizing performance, reliability, and maintainable system design.        </motion.p>
+          {/* I focus on building scalable backend architectures and real-time API platforms using Node.js, emphasizing performance, reliability, and maintainable system design.       */}
+I architect scalable backend platforms and real-time systems, delivering secure, high-performance solutions powered by Node.js and modern backend technologies.          </motion.p>
 
         {/* Location */}
         <motion.div
@@ -281,21 +298,6 @@ export default function HeroSection({ id }) {
         <span className="text-[#484f58] text-xs tracking-widest uppercase text-center">Scroll</span>
         <ChevronDown className="w-4 h-4 text-[#484f58]" />
       </motion.div>
-
-      {/* Shimmer animation for social buttons */}
-      <style>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-        @keyframes gradient-shift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-      `}</style>
     </section>
   );
 }

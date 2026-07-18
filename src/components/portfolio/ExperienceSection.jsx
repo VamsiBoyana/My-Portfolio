@@ -1,15 +1,34 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useMotionTemplate, useInView, animate } from "framer-motion";
 import { Briefcase, TrendingUp, BarChart3, Brain, Zap, Monitor, Target, Activity } from "lucide-react";
 import StarField from "@/components/ui/StarField";
+
+function AnimatedMetric({ value, color }) {
+  const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const [display, setDisplay] = useState(match ? "0" : value);
+
+  useEffect(() => {
+    if (!match || !inView) return;
+    const controls = animate(0, parseFloat(match[1]), {
+      duration: 1.3,
+      ease: "easeOut",
+      onUpdate: (v) => setDisplay(String(Math.round(v))),
+    });
+    return () => controls.stop();
+  }, [inView]);
+
+  return <span ref={ref}>{match ? `${display}${match[2]}` : value}</span>;
+}
 
 const experiences = [
   {
     company: "String Metaverse Limited",
     role: "Software Developer",
     period: "February 2025 — Present",
-    color: "#c084fc",
-    glow: "rgba(192,132,252,0.15)",
+    color: "#ef4444",
+    glow: "rgba(239,68,68,0.15)",
     highlights: [
       { icon: TrendingUp, title: "Financial Ops", metric: "15%↑", desc: "Accuracy improvement in partner payout processing via deep data analysis." },
       { icon: BarChart3, title: "Dashboard Dev", metric: "Funnel", desc: "Engineered lead-to-disbursement funnel dashboard driving key decisions." },
@@ -24,12 +43,134 @@ const experiences = [
     glow: "rgba(129,140,248,0.15)",
     highlights: [
       { icon: Zap, title: "Automation", metric: "30%↓", desc: "Developed REST APIs, automated audit workflows, and implemented monitoring to improve accuracy and system reliability." },
-      // { icon: Monitor, title: "Frontend Eng.", metric: "React", desc: "Built responsive UIs with React.js & Bootstrap across all devices." },
       { icon: Target, title: "Reporting Accuracy", metric: "20%↑", desc: "Built audit-tracking APIs and structured data models to improve reporting accuracy." },
       { icon: Activity, title: "Dashboards", metric: "Live", desc: "Implemented backend logging and monitoring pipelines to improve system reliability." },
     ],
   },
 ];
+
+function ExperienceCard({ exp, index }) {
+  const isCurrent = exp.period.includes("Present");
+  const spotX = useMotionValue(50);
+  const spotY = useMotionValue(50);
+  const spotlight = useMotionTemplate`radial-gradient(420px circle at ${spotX}% ${spotY}%, ${exp.color}22, transparent 70%)`;
+
+  const handlePointerMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    spotX.set(((e.clientX - rect.left) / rect.width) * 100);
+    spotY.set(((e.clientY - rect.top) / rect.height) * 100);
+  };
+
+  return (
+    <motion.div key={exp.company}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ boxShadow: `0 0 60px ${exp.glow}` }}
+      onMouseMove={handlePointerMove}
+      className="relative rounded-2xl border border-[#21262d] bg-[#0d1117] overflow-hidden group transition-all duration-500">
+
+      {/* Dot-grid texture */}
+      <div className="absolute inset-0 opacity-[0.15] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(${exp.color}80 1px, transparent 1px)`,
+          backgroundSize: "22px 22px",
+          maskImage: "radial-gradient(ellipse 80% 60% at 100% 0%, black 0%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 100% 0%, black 0%, transparent 70%)",
+        }} />
+
+      {/* Cursor-follow spotlight */}
+      <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ background: spotlight }} />
+
+      {/* Animated border gradient on hover */}
+      <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `linear-gradient(135deg, ${exp.glow} 0%, transparent 50%)` }} />
+
+      {/* Top shimmer sweep */}
+      <motion.div
+        className="absolute top-0 left-[-100%] w-full h-0.5 opacity-0 group-hover:opacity-100"
+        style={{ background: `linear-gradient(90deg, transparent, ${exp.color}, transparent)` }}
+        animate={{ left: ["-100%", "200%"] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
+
+      {/* Glowing left bar */}
+      <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+        style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)`, boxShadow: `0 0 16px ${exp.color}` }}
+        initial={{ scaleY: 0, originY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3 }} />
+
+      {/* Card shine */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(circle at 0% 50%, ${exp.glow} 0%, transparent 50%)` }} />
+
+      <div className="p-6 md:p-8 pl-8 relative z-10">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 sm:justify-between mb-5">
+          <div className="flex items-center gap-4">
+            <motion.div className="relative p-3 rounded-xl shrink-0"
+              style={{ background: `${exp.color}20` }}
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}>
+              {isCurrent && (
+                <motion.span className="absolute inset-0 rounded-xl"
+                  style={{ border: `1px solid ${exp.color}` }}
+                  animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }} />
+              )}
+              <Briefcase className="w-5 h-5 relative z-10" style={{ color: exp.color }} />
+            </motion.div>
+            <div>
+              <h3 className="text-xl font-bold text-white">{exp.role}</h3>
+              <p className="font-semibold text-sm" style={{ color: exp.color }}>{exp.company}</p>
+            </div>
+          </div>
+          <span className="flex items-center gap-2 text-[#c9d1d9] text-sm border border-[#21262d] bg-[#161b22] rounded-full px-4 py-1 self-start sm:self-auto">
+            {isCurrent && (
+              <motion.span className="w-1.5 h-1.5 rounded-full"
+                style={{ background: exp.color }}
+                animate={{ opacity: [1, 0.3, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }} />
+            )}
+            {exp.period}
+          </span>
+        </div>
+
+        {/* Highlights grid */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          {exp.highlights.map((h, hi) => {
+            const HIcon = h.icon;
+            return (
+              <motion.div key={h.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: hi * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="flex gap-3 p-4 rounded-xl bg-[#161b22] border border-[#21262d] hover:border-purple-500/20 transition-all duration-300">
+                <div className="p-2 rounded-lg shrink-0 h-fit" style={{ background: `${exp.color}15` }}>
+                  <HIcon className="w-4 h-4" style={{ color: exp.color }} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-white font-semibold text-sm">{h.title}</span>
+                    <span className="text-xs font-bold px-1.5 py-0.5 rounded-md" style={{ color: exp.color, background: `${exp.color}15` }}>
+                      <AnimatedMetric value={h.metric} color={exp.color} />
+                    </span>
+                  </div>
+                  <p className="text-[#8b949e] text-sm leading-relaxed">{h.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function ExperienceSection({ id }) {
   return (
@@ -59,87 +200,7 @@ export default function ExperienceSection({ id }) {
 
         <div className="space-y-6">
           {experiences.map((exp, expIdx) => (
-            <motion.div key={exp.company}
-              initial={{ opacity: 0, x: expIdx % 2 === 0 ? -60 : 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ boxShadow: `0 0 60px ${exp.glow}` }}
-              className="relative rounded-2xl border border-[#21262d] bg-[#0d1117] overflow-hidden group transition-all duration-500">
-              
-              {/* Animated border gradient on hover */}
-              <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `linear-gradient(135deg, ${exp.glow} 0%, transparent 50%)` }} />
-
-              {/* Top shimmer sweep */}
-              <motion.div
-                className="absolute top-0 left-[-100%] w-full h-0.5 opacity-0 group-hover:opacity-100"
-                style={{ background: `linear-gradient(90deg, transparent, ${exp.color}, transparent)` }}
-                animate={{ left: ["-100%", "200%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
-              
-              {/* Glowing left bar */}
-              <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-                style={{ background: `linear-gradient(to bottom, ${exp.color}, transparent)` }}
-                initial={{ scaleY: 0, originY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }} />
-
-              {/* Card shine */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(circle at 0% 50%, ${exp.glow} 0%, transparent 50%)` }} />
-
-              <div className="p-6 md:p-8 pl-8">
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0 sm:justify-between mb-5">
-                  <div className="flex items-center gap-4">
-                    <motion.div className="p-3 rounded-xl shrink-0"
-                      style={{ background: `${exp.color}20` }}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}>
-                      <Briefcase className="w-5 h-5" style={{ color: exp.color }} />
-                    </motion.div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{exp.role}</h3>
-                      <p className="font-semibold text-sm" style={{ color: exp.color }}>{exp.company}</p>
-                    </div>
-                  </div>
-                  <span className="text-[#484f58] text-sm border border-[#21262d] rounded-full px-4 py-1 self-start sm:self-auto">
-                    {exp.period}
-                  </span>
-                </div>
-
-                {/* Highlights grid */}
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {exp.highlights.map((h, hi) => {
-                    const HIcon = h.icon;
-                    return (
-                      <motion.div key={h.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: hi * 0.1 }}
-                        whileHover={{ scale: 1.02 }}
-                        className="flex gap-3 p-4 rounded-xl bg-[#161b22] border border-[#21262d] hover:border-purple-500/20 transition-all duration-300">
-                        <div className="p-2 rounded-lg shrink-0 h-fit" style={{ background: `${exp.color}15` }}>
-                          <HIcon className="w-4 h-4" style={{ color: exp.color }} />
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-white font-semibold text-sm">{h.title}</span>
-                            <span className="text-xs font-bold px-1.5 py-0.5 rounded-md" style={{ color: exp.color, background: `${exp.color}15` }}>
-                              {h.metric}
-                            </span>
-                          </div>
-                          <p className="text-[#8b949e] text-sm leading-relaxed">{h.desc}</p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </motion.div>
+            <ExperienceCard key={exp.company} exp={exp} index={expIdx} />
           ))}
         </div>
       </div>

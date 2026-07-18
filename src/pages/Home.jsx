@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { ChevronUp } from "lucide-react";
 import SectionNav from "@/components/portfolio/SectionNav";
 import HeroSection from "@/components/portfolio/HeroSection";
@@ -10,10 +10,13 @@ import ProjectsSection from "@/components/portfolio/ProjectsSection";
 import EducationSection from "@/components/portfolio/EducationSection";
 import AchievementsSection from "@/components/portfolio/AchievementsSection";
 import ContactSection from "@/components/portfolio/ContactSection";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scrollProgress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +33,14 @@ export default function Home() {
 
   return (
     <div className="bg-[#0B1120] min-h-screen">
+      <CustomCursor />
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] z-[60] origin-left"
+        style={{
+          scaleX: scrollProgress,
+          background: "linear-gradient(90deg, #c084fc, #818cf8, #38bdf8)",
+        }}
+      />
       <SectionNav onMenuToggle={setIsNavOpen} />
       <HeroSection id="home" />
       <StatsBar />

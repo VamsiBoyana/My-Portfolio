@@ -38,7 +38,7 @@ const skillGroups = [
       { name: "MongoDB", level: 90 },
       { name: "PostgreSQL", level: 75 },
       { name: "MySQL", level: 71 },
-      // { name: "SQLite", level: 75 },
+      { name: "Prisma ORM", level: 78 },
       { name: "Query Optimization", level: 76 },
     ],
   },
@@ -136,7 +136,15 @@ export default function SkillsSection({ id }) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.12 }}
                 whileHover={{ y: -6, boxShadow: `0 20px 60px ${group.glow}` }}
-                className={`relative group rounded-2xl border border-[#21262d] bg-[#161b22] backdrop-blur-sm p-6 ${group.border} transition-all duration-400 cursor-default overflow-hidden`}>
+                className={`relative group rounded-2xl border border-[#21262d] bg-[#161b22] backdrop-blur-sm p-6 pl-7 ${group.border} transition-all duration-400 cursor-default overflow-hidden`}>
+                {/* Glowing left bar */}
+                <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+                  style={{ background: `linear-gradient(to bottom, ${color.from}, transparent)` }}
+                  initial={{ scaleY: 0, originY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3 }} />
+
                 {/* card shine on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: `radial-gradient(circle at 50% 0%, ${group.glow} 0%, transparent 60%)` }} />
@@ -176,17 +184,6 @@ export default function SkillsSection({ id }) {
           })}
         </div>
       </div>
-
-      {/* Shimmer sweep animation */}
-      <style>{`
-        @keyframes shimmer-sweep {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        .animate-shimmer-sweep {
-          animation: shimmer-sweep 2s infinite;
-        }
-      `}</style>
     </section>
   );
 }

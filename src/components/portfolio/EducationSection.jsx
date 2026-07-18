@@ -10,6 +10,8 @@ const education = [
     period: "July 2018 — June 2022",
     grade: "CGPA: 7.3",
     icon: GraduationCap,
+    color: "#3b82f6",
+    glow: "rgba(59,130,246,0.2)",
   },
   {
     degree: "Board of Secondary Education (MPC)",
@@ -17,6 +19,8 @@ const education = [
     period: "June 2016 — April 2018",
     grade: "PERCENTAGE: 95%",
     icon: BookOpen,
+    color: "#84cc16",
+    glow: "rgba(132,204,22,0.2)",
   },
 ];
 
@@ -56,29 +60,37 @@ export default function EducationSection({ id }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                whileHover={{ boxShadow: "0 0 60px rgba(168,85,247,0.2)" }}
-                className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-6 hover:border-purple-500/20 transition-all duration-500 group overflow-hidden"
+                whileHover={{ boxShadow: `0 0 60px ${edu.glow}` }}
+                className="relative rounded-2xl border border-[#21262d] bg-[#161b22] p-6 pl-8 transition-all duration-500 group overflow-hidden"
               >
                 {/* Animated border gradient on hover */}
                 <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: "linear-gradient(135deg, rgba(168,85,247,0.2) 0%, transparent 50%)" }} />
+                  style={{ background: `linear-gradient(135deg, ${edu.glow} 0%, transparent 50%)` }} />
 
                 {/* Top shimmer sweep */}
                 <motion.div
                   className="absolute top-0 left-[-100%] w-full h-0.5 opacity-0 group-hover:opacity-100"
-                  style={{ background: "linear-gradient(90deg, transparent, #a855f7, transparent)" }}
+                  style={{ background: `linear-gradient(90deg, transparent, ${edu.color}, transparent)` }}
                   animate={{ left: ["-100%", "200%"] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
-                
+
+                {/* Glowing left bar */}
+                <motion.div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
+                  style={{ background: `linear-gradient(to bottom, ${edu.color}, transparent)` }}
+                  initial={{ scaleY: 0, originY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3 }} />
+
                 <div className="relative z-10">
-                  <div className="p-3 rounded-xl bg-purple-500/10 w-fit mb-4">
-                    <Icon className="w-5 h-5 text-purple-400" />
+                  <div className="p-3 rounded-xl w-fit mb-4" style={{ background: `${edu.color}1a` }}>
+                    <Icon className="w-5 h-5" style={{ color: edu.color }} />
                   </div>
                   <h3 className="text-lg font-bold text-white mb-1">{edu.degree}</h3>
-                  <p className="text-slate-400 text-sm mb-3">{edu.institution}</p>
+                  <p className="text-[#8b949e] text-sm mb-3">{edu.institution}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-500 text-xs">{edu.period}</span>
-                    <span className="text-purple-400 text-sm font-semibold">{edu.grade}</span>
+                    <span className="text-[#8b949e] text-xs">{edu.period}</span>
+                    <span className="text-sm font-semibold" style={{ color: edu.color }}>{edu.grade}</span>
                   </div>
                 </div>
               </motion.div>
